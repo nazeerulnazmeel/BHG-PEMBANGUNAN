@@ -24,7 +24,7 @@
             <div class="illustration"><i class="icon ion-ios-locked-outline"></i></div>
             <div class="form-group"><input class="form-control" type="text" name="username" placeholder="Username"></div>
             <div class="form-group"><input class="form-control" type="password" name="password" placeholder="Password"></div>
-            <div class="form-group"><button class="btn btn-primary btn-block" type="submit"  name="submit">Log In</button></div>
+            <div class="form-group"><button class="btn btn-primary btn-block" type="submit"  name="login-submit">Log In</button></div>
         </form>
     </div>
     <script src="../assets/js/jquery.min.js"></script>
