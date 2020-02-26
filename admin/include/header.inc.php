@@ -1,3 +1,7 @@
+<?php
+    date_default_timezone_set("Asia/Kuala_Lumpur");
+    $time_date = date(' l, d F Y h:i:s A', time());
+?>
 <!DOCTYPE html>
 <html>
 
@@ -23,13 +27,12 @@
                 <div class="collapse navbar-collapse"
                     id="navcol-1">
                     <ul class="nav navbar-nav mr-auto">
-                        <li class="nav-item" role="presentation"><a class="nav-link active" href="#">Home</a></li>
-                        <li class="nav-item" role="presentation"></li>
+                        <li class="nav-item" role="presentation"><a class="nav-link" href="dashboard.php">Home</a></li>
                         <li class="nav-item" role="presentation"></li>
                         <li class="dropdown nav-item"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#">Edit</a>
                             <div class="dropdown-menu" role="menu">
-                                <a class="dropdown-item" role="presentation" href="edit-pegawai.php">Senarai Pegawai</a>
-                                <a class="dropdown-item" role="presentation" href="#">Senarai Cawangan</a>
+                                <a class="dropdown-item" role="presentation" href="pegawai.php">Senarai Pegawai</a>
+                                <a class="dropdown-item" role="presentation" href="cawangan-unit.php">Senarai Cawangan &amp; Unit</a>
                                 <a class="dropdown-item" role="presentation" href="#">Senarai Jawatan &amp; Gred</a>
                             </div>
                         </li>
