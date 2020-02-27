@@ -1,6 +1,13 @@
 <?php
     date_default_timezone_set("Asia/Kuala_Lumpur");
     $time_date = date(' l, d F Y h:i:s A', time());
+
+    // if(!isset($_SESSION['adm_usrname'])){
+    //     header("Location: index.php");
+    //  }
+    //  else {
+    //     header("Location: dashboard.php");
+    //  }
 ?>
 <!DOCTYPE html>
 <html>

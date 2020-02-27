@@ -20,24 +20,52 @@ include 'include/header.inc.php';
         </div>
         <div class="form-group">
             <label for="exampleFormControlSelect1">Cawangan</label>
-            <select class="form-control" id="exampleFormControlSelect1">
+            <select id="pilih-cawangan" onchange="fetch_unit(this.val);" class="form-control">
                 <option>Pilih cawangan</option>
-                <option>Cawangan Pengurusan Projek 1</option>
-                <option>Cawangan Pengurusan Projek 2</option>
-                <option>Cawangan Pengurusan Sumber</option>
+                <?php
+                require '../includes/db.inc.php';
+
+                $sql = "SELECT * from cawangan";
+                $result = mysqli_query($db, $sql);
+                $resultCheck = mysqli_num_rows($result);
+
+                if ($resultCheck > 0) {
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        echo "<option value='".$row['uid']."'>" . $row['nama_cawangan'] . "</option>";
+                    }
+                }
+                ?>
+                <!-- <option value="1">Cawangan Pengurusan Projek 1</option>
+                <option value="2">Cawangan Pengurusan Projek 2</option>
+                <option value="3">Cawangan Pengurusan Sumber</option> -->
             </select>
         </div>
         <div class="form-group">
             <label for="exampleFormControlSelect1">Unit</label>
-            <select class="form-control" id="exampleFormControlSelect1">
-                <option>Pilih unit</option>
-                <option>Unit Tanah</option>
-                <option>Unit Public Private Partnership</option>
+            <select id="tunjuk-unit" class="form-control">
             </select>
         </div>
         <button class="btn btn-primary" type="submit" name="tambah-pegawai">Simpan</button>
     </form>
 </div>
+
+<script type="text/javascript">
+
+    $(document).ready(function() {
+        $('#pilih-cawangan').on('change', function() {
+            var cawangan_id = $(this).val
+        $.ajax({
+            type: 'POST',
+            url: 'controller/loadunit.php',
+            data: 'uid='+cawangan_id,
+            success: function(response) {
+                $('#tunjuk-unit').html(response);
+            }
+        });
+        })
+    })
+    
+</script>
 
 <?php
 include 'include/footer.inc.php';
