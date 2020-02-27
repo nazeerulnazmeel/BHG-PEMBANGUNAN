@@ -20,7 +20,7 @@ include 'include/header.inc.php';
         </div>
         <div class="form-group">
             <label for="exampleFormControlSelect1">Cawangan</label>
-            <select id="pilih-cawangan" onchange="fetch_unit(this.val);" class="form-control">
+            <select id="pilih-cawangan" class="form-control">
                 <option>Pilih cawangan</option>
                 <?php
                 require '../includes/db.inc.php';
@@ -48,24 +48,6 @@ include 'include/header.inc.php';
         <button class="btn btn-primary" type="submit" name="tambah-pegawai">Simpan</button>
     </form>
 </div>
-
-<script type="text/javascript">
-
-    $(document).ready(function() {
-        $('#pilih-cawangan').on('change', function() {
-            var cawangan_id = $(this).val
-        $.ajax({
-            type: 'POST',
-            url: 'controller/loadunit.php',
-            data: 'uid='+cawangan_id,
-            success: function(response) {
-                $('#tunjuk-unit').html(response);
-            }
-        });
-        })
-    })
-    
-</script>
 
 <?php
 include 'include/footer.inc.php';
