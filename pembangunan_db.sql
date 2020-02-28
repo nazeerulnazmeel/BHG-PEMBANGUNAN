@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 26, 2020 at 09:54 AM
+-- Generation Time: Feb 28, 2020 at 10:02 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.2
 
@@ -73,6 +73,14 @@ CREATE TABLE `kategori` (
   `nama_kumpulan` tinytext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `kategori`
+--
+
+INSERT INTO `kategori` (`uid`, `nama_kumpulan`) VALUES
+(1, 'pengurusanprofesional'),
+(2, 'pelaksana');
+
 -- --------------------------------------------------------
 
 --
@@ -90,6 +98,16 @@ CREATE TABLE `pegawai` (
   `kumpulan_id` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `pegawai`
+--
+
+INSERT INTO `pegawai` (`uid`, `kad_pengenalan`, `nama`, `jawatan`, `gred`, `cawangan_id`, `unit_id`, `kumpulan_id`) VALUES
+(3, '890523055329', 'Ahmad Albab bin Ramli', 'PT', 'N17', 3, 12, 2),
+(4, '850221055328', 'Abu bin Selamat', 'PTD', 'M48', 1, 1, 1),
+(5, '821112125042', 'Alyunizah binti Halim', 'PTD', 'M48', 3, 12, 1),
+(6, '841102035842', 'Nomawati binti Che harun', 'PT (P/O)', 'N19', 3, 12, 2);
+
 -- --------------------------------------------------------
 
 --
@@ -104,6 +122,13 @@ CREATE TABLE `penilai` (
   `jawatan` tinytext NOT NULL,
   `gred` tinytext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `penilai`
+--
+
+INSERT INTO `penilai` (`uid`, `kad_pengenalan`, `passwd`, `nama`, `jawatan`, `gred`) VALUES
+(2, '821112125042', '$2y$10$F4ahDPaxcV6KHX34nD/7jeOcHsHKTAkLWWPqwsO2hPFLGg6oEa1Ye', 'Alyunizah binti Halim', 'KPSU', 'M48');
 
 -- --------------------------------------------------------
 
@@ -199,19 +224,19 @@ ALTER TABLE `cawangan`
 -- AUTO_INCREMENT for table `kategori`
 --
 ALTER TABLE `kategori`
-  MODIFY `uid` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `uid` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `pegawai`
 --
 ALTER TABLE `pegawai`
-  MODIFY `uid` int(150) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `uid` int(150) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `penilai`
 --
 ALTER TABLE `penilai`
-  MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `unit`
