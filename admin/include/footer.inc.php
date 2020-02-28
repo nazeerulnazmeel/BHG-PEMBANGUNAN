@@ -5,17 +5,43 @@
 <script type="text/javascript">
     $(document).ready(function() {
         $('#pilih-cawangan').change(function() {
-            var uid = $('#pilih-cawangan').val();
+            var cawanganUid = $(this).val();
             $.ajax({
                 method: 'post',
                 url: 'controller/loadunit.php',
-                data: 'uid=' + uid
-            }).done(function(units) {
+                data: {cawanganID: cawanganUid},
+                dataType: 'text',
+                success: function(units) {
                 console.log(units);
                 $('#tunjuk-unit').empty();
                 $('#tunjuk-unit').html(units);
+                }
             });
-        })
+        });
+    });
+
+    $(document).ready(function() {
+        $('#tunjuk-unit').change(function() {
+            var unit_id = $('#tunjuk-unit').val();
+            $.ajax({
+                method: 'post',
+                url: 'controller/loadunit.php',
+                data: 'unit_id_pnp=' + unit_id
+            }).done(function(kump) {
+                console.log(kump);
+                $('#pengurusan').empty();
+                $('#pengurusan').html(kump);
+            });
+
+            $.ajax({
+                method: 'post',
+                url: 'controller/loadunit.php',
+                data: 'unit_id_pel=' + unit_id
+            }).done(function(kump2) {
+                $('#pelaksana').empty();
+                $('#pelaksana').html(kump2);
+            });
+        });
     });
 </script>
 </body>

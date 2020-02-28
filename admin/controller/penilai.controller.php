@@ -10,7 +10,7 @@ if (isset($_POST['tambah-penilai'])) {
     $gred = $_POST['gred'];
 
     if (empty($kad_pengenalan) || empty($passwd) || empty($nama) || empty($jawatan) || empty($gred)) {
-        header("Location: ../penilai.php?error=emptyfields");
+        header("Location: ../tambah-penilai.php?error=emptyfields");
         exit();
     }
     else {
@@ -18,7 +18,7 @@ if (isset($_POST['tambah-penilai'])) {
         $stmt = mysqli_stmt_init($db);
 
         if(!mysqli_stmt_prepare($stmt, $sql)) {
-            header("Location: ../penilai.php?error=sqlerror");
+            header("Location: ../tambah-penilai.php?error=sqlerror");
             exit();
         }
         else {
@@ -28,18 +28,20 @@ if (isset($_POST['tambah-penilai'])) {
             $resultCheck = mysqli_stmt_num_rows($stmt);
 
             if($resultCheck >0) {
-                header("Location: ../penilai.php?error=userexists");
+                header("Location: ../tambah-penilai.php?error=userexists");
                 exit();
             }
             else {
-                $sql = "INSERT INTO penilai (kad_pengenalan, passwd nama, jawatan, gred) VALUES (?,?,?,?) ";
+                $sql = "INSERT INTO penilai (kad_pengenalan, passwd, nama, jawatan, gred) VALUES (?,?,?,?,?) ";
                 $stmt = mysqli_stmt_init($db);
                 if (!mysqli_stmt_prepare($stmt, $sql)) {
-                    header("Location: ../penilai.php?error=sqlerror");
+                    header("Location: ../tambah-penilai.php?error=sqlerror");
                     exit();
                 }
                 else {
-                    mysqli_stmt_bind_param($stmt, "ssss", $kad_pengenalan, $passwd, $nama, $jawatan, $gred);
+                    $passwdHashed = password_hash($passwd, PASSWORD_DEFAULT);
+
+                    mysqli_stmt_bind_param($stmt, "sssss", $kad_pengenalan, $passwdHashed, $nama, $jawatan, $gred);
                     mysqli_stmt_execute($stmt);
 
                     header("Location: ../penilai.php?add=success");
@@ -52,6 +54,6 @@ if (isset($_POST['tambah-penilai'])) {
     mysqli_close($db);
 }
 else {
-    header("Location: ../penilai.php");
+    header("Location: ../tambah-penilai.php");
     exit();
 }

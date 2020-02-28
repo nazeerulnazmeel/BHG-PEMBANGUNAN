@@ -9,29 +9,37 @@ include 'include/header.inc.php';
         <a name="" id="" class="btn btn-primary" href="tambah-pegawai.php" role="button">Tambah Pegawai</a>
         <form action="" method="post">
             <div class="form-group">
-            <label for="exampleFormControlSelect1">Cawangan</label>
-            <select class="form-control" id="exampleFormControlSelect1">
-                <option>Cawangan Pengurusan Projek 1</option>
-                <option>Cawangan Pengurusan Projek 2</option>
-                <option>Cawangan Pengurusan Sumber</option>
-            </select>
+                <label for="exampleFormControlSelect1">Cawangan</label>
+                <select class="form-control" id="pilih-cawangan">
+                    <option value="">Pilih cawangan</option>
+                    <?php
+                    require '../includes/db.inc.php';
+
+                    $sql = "SELECT * from cawangan";
+                    $result = mysqli_query($db, $sql);
+                    $resultCheck = mysqli_num_rows($result);
+
+                    if ($resultCheck > 0) {
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            echo "<option value='" . $row['uid'] . "'>" . $row['nama_cawangan'] . "</option>";
+                        }
+                    }
+                    ?>
+                </select>
             </div>
             <div class="form-group">
-            <label for="exampleFormControlSelect1">Unit</label>
-            <select class="form-control" id="exampleFormControlSelect1">
-                <option>Unit Tanah</option>
-                <option>Unit Public Private Partnership</option>
-                <option>Unit Penyelarasan</option>
-                <option>Unit Kewangan Pentadbiran</option>
-            </select>
+                <label for="exampleFormControlSelect1">Unit</label>
+                <select class="form-control" id="tunjuk-unit">
+                    <option value="">Pilih unit</option>
+                </select>
             </div>
         </form>
     </div>
-    <div class="container">
+    <div class="container" id="senarai-pegawai">
         <div class="table-responsive">
             <h5>Kumpulan Pengurusan &amp; Profesional</h5>
-            <table class="table">
-                <thead>
+            <table class="table table-striped">
+                <thead class="thead-dark">
                     <tr>
                         <th>Nama</th>
                         <th>Jawatan &amp; Gred</th>
@@ -40,22 +48,15 @@ include 'include/header.inc.php';
                         <th>Edit</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>Ahmad Albab</td>
-                        <td>PTD M41</td>
-                        <td>Pengurusan Sumber</td>
-                        <td>Unit Pentadbiran</td>
-                        <td>Cell 3</td>
-                    </tr>
-                    <tr></tr>
+                <tbody id="pengurusan">
+
                 </tbody>
             </table>
         </div>
         <h5>Kumpulan Pelaksana</h5>
         <div class="table-responsive">
             <table class="table">
-                <thead>
+                <thead class="thead-dark">
                     <tr>
                         <th>Nama</th>
                         <th>Jawatan &amp; Gred</th>
@@ -64,13 +65,8 @@ include 'include/header.inc.php';
                         <th>Edit</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>Zaki</td>
-                        <td>PT N17</td>
-                        <td>Cell 3</td>
-                    </tr>
-                    <tr></tr>
+                <tbody id="pelaksana">
+
                 </tbody>
             </table>
         </div>

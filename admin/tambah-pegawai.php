@@ -12,15 +12,15 @@ include 'include/header.inc.php';
         <div class="form-group"><label>Gred</label><input class="form-control" type="text" name="gred" placeholder="M48"></div>
         <div class="form-group">
             <label for="exampleFormControlSelect1">Kumpulan</label>
-            <select class="form-control" id="exampleFormControlSelect1">
+            <select class="form-control" name="kumpulan">
                 <option>Pilih kumpulan</option>
-                <option>Pengurusan &amp; Profesional</option>
-                <option>Pelaksana</option>
+                <option value="1">Pengurusan &amp; Profesional</option>
+                <option value="2">Pelaksana</option>
             </select>
         </div>
         <div class="form-group">
             <label for="exampleFormControlSelect1">Cawangan</label>
-            <select id="pilih-cawangan" class="form-control">
+            <select id="pilih-cawangan" class="form-control" name="cawangan">
                 <option>Pilih cawangan</option>
                 <?php
                 require '../includes/db.inc.php';
@@ -35,14 +35,11 @@ include 'include/header.inc.php';
                     }
                 }
                 ?>
-                <!-- <option value="1">Cawangan Pengurusan Projek 1</option>
-                <option value="2">Cawangan Pengurusan Projek 2</option>
-                <option value="3">Cawangan Pengurusan Sumber</option> -->
             </select>
         </div>
         <div class="form-group">
             <label for="exampleFormControlSelect1">Unit</label>
-            <select id="tunjuk-unit" class="form-control">
+            <select id="tunjuk-unit" class="form-control" name="unit">
             </select>
         </div>
         <button class="btn btn-primary" type="submit" name="tambah-pegawai">Simpan</button>

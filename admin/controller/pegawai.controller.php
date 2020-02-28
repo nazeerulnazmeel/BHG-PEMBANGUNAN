@@ -7,11 +7,12 @@ if (isset($_POST['tambah-pegawai'])) {
     $nama = $_POST['nama'];
     $jawatan = $_POST['jawatan'];
     $gred = $_POST['gred'];
+    $kumpulan = $_POST['kumpulan'];
     $cawangan = $_POST['cawangan'];
     $unit = $_POST['unit'];
 
-    if (empty($kad_pengenalan) || empty($nama) || empty($jawatan) || empty($gred) || empty($cawangan) || empty($unit)) {
-        header("Location: ../edit-pegawai.php?error=emptyfields");
+    if (empty($kad_pengenalan) || empty($nama) || empty($jawatan) || empty($gred) || empty($kumpulan) || empty($cawangan) || empty($unit)) {
+        header("Location: ../tambah-pegawai.php?error=emptyfields");
         exit();
     }
     else {
@@ -19,7 +20,7 @@ if (isset($_POST['tambah-pegawai'])) {
         $stmt = mysqli_stmt_init($db);
 
         if(!mysqli_stmt_prepare($stmt, $sql)) {
-            header("Location: ../edit-pegawai.php?error=sqlerror");
+            header("Location: ../tambah-pegawai.php?error=sqlerror");
             exit();
         }
         else {
@@ -29,21 +30,21 @@ if (isset($_POST['tambah-pegawai'])) {
             $resultCheck = mysqli_stmt_num_rows($stmt);
 
             if($resultCheck >0) {
-                header("Location: ../edit-pegawai.php?error=userexists");
+                header("Location: ../tambah-pegawai.php?error=userexists");
                 exit();
             }
             else {
-                $sql = "INSERT INTO pegawai (kad_pengenalan, nama, jawatan, gred, cawangan, unit) VALUES (?,?,?,?,?,?) ";
+                $sql = "INSERT INTO pegawai (kad_pengenalan, nama, jawatan, gred, cawangan_id, unit_id, kumpulan_id) VALUES (?,?,?,?,?,?,?) ";
                 $stmt = mysqli_stmt_init($db);
                 if (!mysqli_stmt_prepare($stmt, $sql)) {
-                    header("Location: ../edit-pegawai.php?error=sqlerror");
+                    header("Location: ../tambah-pegawai.php?error=sqlerror");
                     exit();
                 }
                 else {
-                    mysqli_stmt_bind_param($stmt, "ssssss", $kad_pengenalan, $nama, $jawatan, $gred, $cawangan, $unit);
+                    mysqli_stmt_bind_param($stmt, "ssssiii", $kad_pengenalan, $nama, $jawatan, $gred, $cawangan, $unit, $kumpulan);
                     mysqli_stmt_execute($stmt);
 
-                    header("Location: ../edit-pegawai.php?add=success");
+                    header("Location: ../pegawai.php?add=success");
                     exit();
                 }
             }
@@ -53,6 +54,6 @@ if (isset($_POST['tambah-pegawai'])) {
     mysqli_close($db);
 }
 else {
-    header("Location: ../edit-pegawai.php");
+    header("Location: ../tambah-pegawai.php");
     exit();
 }
