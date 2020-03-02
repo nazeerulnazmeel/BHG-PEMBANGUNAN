@@ -1,6 +1,6 @@
 <?php
 
-require '../../includes/db.inc.php';
+require 'db.inc.php';
 
 if (isset($_POST['cawanganID'])) {
     $cawangan = $_POST['cawanganID'];
@@ -38,7 +38,7 @@ if (isset($_POST['cawanganID'])) {
                 echo "<td>" . $row['jawatan'] . " " . $row['gred'] . "</td>";
                 echo "<td>" . $row['nama_cawangan'] . "</td>";
                 echo "<td>" . $row['nama_unit'] . "</td>";
-                echo "<td><a class='btn btn-primary' href='edit-pegawai.php?uid=".$row['uid']."'>Edit</a></td>";
+                echo "<td>test</td>";
                 echo "</td>";
             }
         }

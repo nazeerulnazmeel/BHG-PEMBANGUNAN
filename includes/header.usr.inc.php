@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/fonts/ionicons.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/css/swiper.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="assets/css/Login-Form-Clean.css">
     <link rel="stylesheet" href="assets/css/Login-Form-Dark.css">
     <link rel="stylesheet" href="assets/css/Navigation-with-Button-1.css">
@@ -20,49 +21,16 @@
     <div>
         <nav class="navbar navbar-light navbar-expand-md navigation-clean-button">
             <div class="container"><a class="navbar-brand" href="index.html">BHG PEMBANGUNAN</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-                <div
-                    class="collapse navbar-collapse" id="navcol-1">
+                <div class="collapse navbar-collapse" id="navcol-1">
                     <ul class="nav navbar-nav mr-auto">
                         <li class="nav-item" role="presentation"><a class="nav-link active" href="#">First Item</a></li>
                         <li class="nav-item" role="presentation"><a class="nav-link" href="#">Second Item</a></li>
                         <li class="dropdown nav-item"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#">Dropdown </a>
                             <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="#">First Item</a><a class="dropdown-item" role="presentation" href="#">Second Item</a><a class="dropdown-item" role="presentation" href="#">Third Item</a></div>
                         </li>
-                    </ul><span class="navbar-text actions"> <a class="btn btn-light action-button" role="button" href="index.html">Logout</a></span></div>
+                    </ul><span class="navbar-text actions"> <a class="btn btn-light action-button" role="button" href="index.html">Logout</a></span>
+                </div>
+            </div>
+        </nav>
     </div>
-    </nav>
-    </div>
-    <div class="container">
-        <h4 style="margin-top: 20px;">Selamat Datang Abdul Ghoffur bin Mustaffa!</h4>
-        <h6 style="color: rgb(101,102,103);">Pegawai Tadbir Diplomatik M54</h6>
-        <div class="table-responsive" style="margin: 0px;margin-top: 50px;">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th class="table-active">Nama</th>
-                        <th class="table-active">Jawatan &amp; Gred</th>
-                        <th class="table-active">Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Tobrani bin Kamisan</td>
-                        <td>PPT N32</td>
-                        <td><button class="btn btn-danger" type="button" style="width: 117px;">Belum dinilai</button></td>
-                    </tr>
-                    <tr>
-                        <td>Khalid bin Jamlus</td>
-                        <td>PT N17</td>
-                        <td><button class="btn btn-success" type="button" style="width: 117px;">Telah dinilai</button></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/js/swiper.jquery.min.js"></script>
-    <script src="assets/js/Simple-Slider.js"></script>
-</body>
-
-</html>
+    

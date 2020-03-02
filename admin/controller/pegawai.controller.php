@@ -14,33 +14,29 @@ if (isset($_POST['tambah-pegawai'])) {
     if (empty($kad_pengenalan) || empty($nama) || empty($jawatan) || empty($gred) || empty($kumpulan) || empty($cawangan) || empty($unit)) {
         header("Location: ../tambah-pegawai.php?error=emptyfields");
         exit();
-    }
-    else {
+    } else {
         $sql = "SELECT * FROM pegawai WHERE kad_pengenalan=?";
         $stmt = mysqli_stmt_init($db);
 
-        if(!mysqli_stmt_prepare($stmt, $sql)) {
+        if (!mysqli_stmt_prepare($stmt, $sql)) {
             header("Location: ../tambah-pegawai.php?error=sqlerror");
             exit();
-        }
-        else {
+        } else {
             mysqli_stmt_bind_param($stmt, "s", $kad_pengenalan);
             mysqli_stmt_execute($stmt);
             mysqli_stmt_store_result($stmt);
             $resultCheck = mysqli_stmt_num_rows($stmt);
 
-            if($resultCheck >0) {
+            if ($resultCheck > 0) {
                 header("Location: ../tambah-pegawai.php?error=userexists");
                 exit();
-            }
-            else {
+            } else {
                 $sql = "INSERT INTO pegawai (kad_pengenalan, nama, jawatan, gred, cawangan_id, unit_id, kumpulan_id) VALUES (?,?,?,?,?,?,?) ";
                 $stmt = mysqli_stmt_init($db);
                 if (!mysqli_stmt_prepare($stmt, $sql)) {
                     header("Location: ../tambah-pegawai.php?error=sqlerror");
                     exit();
-                }
-                else {
+                } else {
                     mysqli_stmt_bind_param($stmt, "ssssiii", $kad_pengenalan, $nama, $jawatan, $gred, $cawangan, $unit, $kumpulan);
                     mysqli_stmt_execute($stmt);
 
@@ -53,7 +49,50 @@ if (isset($_POST['tambah-pegawai'])) {
     mysqli_stmt_close($stmt);
     mysqli_close($db);
 }
-else {
-    header("Location: ../tambah-pegawai.php");
-    exit();
+
+else if (isset($_POST['edit-pegawai'])) {
+    require '../../includes/db.inc.php';
+
+    $user_id = $_GET
+    $kad_pengenalan = $_POST['kad_pengenalan'];
+    $nama = $_POST['nama'];
+    $jawatan = $_POST['jawatan'];
+    $gred = $_POST['gred'];
+    $kumpulan = $_POST['kumpulan'];
+    $cawangan = $_POST['cawangan'];
+    $unit = $_POST['unit'];
+
+
+    $sql = "SELECT * FROM pegawai WHERE kad_pengenalan=?";
+    $stmt = mysqli_stmt_init($db);
+
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        header("Location: ../edit-pegawai.php?error=sqlerror");
+        exit();
+    } else {
+        mysqli_stmt_bind_param($stmt, "s", $kad_pengenalan);
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_store_result($stmt);
+        $resultCheck = mysqli_stmt_num_rows($stmt);
+
+        if ($resultCheck == 1) {
+            header("Location: ../edit-pegawai.php?error=userexists");
+            exit();
+        } else {
+            $sql = "UPDATE pegawai SET kad_pengenalan=$kad_pengenalan, nama=$nama, jawatan=$jawatan, gred=$gred, cawangan_id=$cawangan, unit_id=$unit, kumpulan_id=$kumpulan";
+            $stmt = mysqli_stmt_init($db);
+            if (!mysqli_stmt_prepare($stmt, $sql)) {
+                header("Location: ../edit-pegawai.php?error=sqlerror");
+                exit();
+            } else {
+                mysqli_stmt_bind_param($stmt, "ssssiii", $kad_pengenalan, $nama, $jawatan, $gred, $cawangan, $unit, $kumpulan);
+                mysqli_stmt_execute($stmt);
+
+                header("Location: ../pegawai.php?update=success");
+                exit();
+            }
+        }
+    }
+    mysqli_stmt_close($stmt);
+    mysqli_close($db);
 }

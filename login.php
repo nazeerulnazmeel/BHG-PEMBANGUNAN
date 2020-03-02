@@ -17,18 +17,19 @@
 </head>
 
 <body>
+
     <div class="login-clean">
-        <form method="post">
+        <form action="includes/login.inc.php" method="post">
             <h2 class="sr-only">Login Form</h2>
             <div class="illustration"><i class="icon ion-ios-navigate"></i></div>
-            <div class="form-group"><input class="form-control" type="email" name="email" placeholder="IC Number"></div>
+            <div class="form-group"><input class="form-control" type="text" name="kad_pengenalan" placeholder="No. Kad Pengenalan"></div>
             <div class="form-group"><input class="form-control" type="password" name="password" placeholder="Password"></div>
-            <div class="form-group"><button class="btn btn-primary btn-block" type="submit">Log In</button></div><a class="forgot" href="#">Forgot your email or password?</a></form>
+            <div class="form-group"><button class="btn btn-primary btn-block" type="submit" name="penilai-login">Log In</button></div><a class="forgot" href="#">Forgot your email or password?</a>
+        </form>
     </div>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/js/swiper.jquery.min.js"></script>
     <script src="assets/js/Simple-Slider.js"></script>
 </body>
-
 </html>
