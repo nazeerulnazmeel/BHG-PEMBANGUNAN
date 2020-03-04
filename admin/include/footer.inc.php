@@ -9,12 +9,14 @@
             $.ajax({
                 method: 'post',
                 url: 'controller/loadunit.php',
-                data: {cawanganID: cawanganUid},
+                data: {
+                    cawanganID: cawanganUid
+                },
                 dataType: 'text',
                 success: function(units) {
-                console.log(units);
-                $('#tunjuk-unit').empty();
-                $('#tunjuk-unit').html(units);
+                    console.log(units);
+                    $('#tunjuk-unit').empty();
+                    $('#tunjuk-unit').html(units);
                 }
             });
         });
@@ -41,6 +43,16 @@
                 $('#pelaksana').empty();
                 $('#pelaksana').html(kump2);
             });
+        });
+    });
+
+    $(document).ready(function() {
+        $('#access-ctrl').change(function() {
+            var access_id = $('#access-ctrl').val();
+
+            if (access_id == "1") {
+                $('#passwd-popup').modal('show');
+            }
         });
     });
 </script>

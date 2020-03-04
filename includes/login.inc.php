@@ -12,7 +12,8 @@ if (isset($_POST['penilai-login'])) {
       exit();
    } 
    else {
-      $sql = "SELECT * FROM penilai WHERE kad_pengenalan=?";
+      // $sql = "SELECT * FROM penilai WHERE kad_pengenalan=?";
+      $sql = "SELECT * FROM pegawai INNER JOIN penilai ON pegawai.uid=penilai.pegawai_id WHERE kad_pengenalan=?";
       $stmt = mysqli_stmt_init($db);
       if (!mysqli_stmt_prepare($stmt, $sql)) {
          header("Location: login.php?error=sqlerror");
@@ -25,15 +26,23 @@ if (isset($_POST['penilai-login'])) {
 
          if($row = mysqli_fetch_assoc($result)){
             $pwdCheck = password_verify($passwd, $row['passwd']);
+            $accessCheck = $row['access_id'];
+            if ($accessCheck != 1) {
+               header("Location: ../login.php?error=accessdenied");
+               exit();
+            }
             if ($pwdCheck == false) {
                header("Location: ../login.php?error=wrongpassword");
                exit();
             }
-            else if ($pwdCheck == true) {
+            else if ($pwdCheck == true && $accessCheck == 1) {
                session_start();
-               $_SESSION[] = $row['uid'];
-               $_SESSION[] = $row['kad_pengenalan'];
-               $_SESSION[] = $row['unit_id'];
+               $_SESSION['uid'] = $row['uid'];
+               // $_SESSION['kad_pengenalan'] = $row['kad_pengenalan'];
+               $_SESSION['nama'] = $row['nama'];
+               $_SESSION['jawatan'] = $row['jawatan'];
+               $_SESSION['gred'] = $row['gred'];
+               $_SESSION['unit_id'] = $row['unit_id'];
 
                header("Location: ../senaraipegawai.php");
                exit();

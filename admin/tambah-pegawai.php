@@ -8,7 +8,7 @@ include 'include/header.inc.php';
     <form action="controller/pegawai.controller.php" method="post">
         <div class="form-group"><label>Nama</label><input class="form-control" type="text" name="nama" placeholder="Ahmad Albab"></div>
         <div class="form-group"><label>No. Kad Pengenalan</label><input class="form-control" type="text" name="kad_pengenalan" placeholder="810523025322"></div>
-        <div class="form-group"><label>Jawatan</label><input class="form-control" type="text" name="jawatan" placeholder="PTD"></div>
+        <div class="form-group"><label>Jawatan</label><input class="form-control" type="text" name="jawatan" placeholder="KPSU"></div>
         <div class="form-group"><label>Gred</label><input class="form-control" type="text" name="gred" placeholder="M48"></div>
         <div class="form-group">
             <label for="exampleFormControlSelect1">Kumpulan</label>
