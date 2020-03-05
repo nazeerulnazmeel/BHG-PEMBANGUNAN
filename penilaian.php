@@ -1,3 +1,15 @@
+<?php
+session_start();
+require 'includes/db.inc.php';
+
+$user_id = $_GET['uid'];
+$penilai_id = $_SESSION['uid'];
+$sql = "SELECT * FROM ((((pegawai INNER JOIN cawangan ON pegawai.cawangan_id=cawangan.uid) INNER JOIN unit ON pegawai.unit_id=unit.uid) INNER JOIN kategori ON pegawai.kumpulan_id=kategori.uid) INNER JOIN access_control ON pegawai.access_id=access_control.uid) WHERE pegawai.uid=$user_id";
+
+$result = mysqli_query($db, $sql);
+$resultCheck = mysqli_num_rows($result);
+
+?>
 <!DOCTYPE html>
 <html>
 
@@ -19,8 +31,16 @@
 <body>
     <div></div>
     <div class="container">
-        <h3>Calon: Mohammad Bazli</h3>
-        <h5>Jawatan:</h5>
+        <?php
+        if ($resultCheck > 0) {
+            while ($row = mysqli_fetch_assoc($result)) {
+                echo "<h3>Calon: " . $row['nama'] . "</h3>";
+                echo "<h5>Jawatan: " . $row['jawatan'] . " " . $row['gred'] . "</h5>";
+            }
+        }
+        ?>
+        <!-- <h3>Calon: Mohammad Bazli</h3>
+        <h5>Jawatan:</h5> -->
     </div>
     <div class="container">
         <div class="table-responsive table-bordered border-light">
@@ -55,7 +75,15 @@
         </div>
     </div>
     <div class="container">
-        <form>
+        <form action="includes/penilaian.inc.php" method="post">
+            <div class="form-group">
+                <input type="hidden" name="user_id" class="form-control" value="<?php echo $user_id; ?>">
+                <?php echo $user_id; ?>
+            </div>
+            <div class="form-group">
+                <input type="hidden" name="penilai_id" class="form-control" value="<?php echo $penilai_id; ?>">
+                <?php echo $penilai_id; ?>
+            </div>
             <div class="table-responsive">
                 <table class="table">
                     <thead>
@@ -72,15 +100,174 @@
                             <td>Komitmen Terhadap Kerja</td>
                             <td>Memberikan (dari segi pendirian dan perbuatan) sepenuh tenaga, perhatian dan menunjukkan sokongan serta azam yang sepenuhnya semasa melaksanakan sesuatu kerja dan tugasan.</td>
                             <td>
-                                <div class="dropdown"><button class="btn btn-outline-info btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false" type="button">Pilih</button>
-                                    <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="#">First Item</a><a class="dropdown-item" role="presentation" href="#">Second Item</a><a class="dropdown-item" role="presentation" href="#">Third Item</a></div>
+                                <div class="form-group">
+                                    <select class="form-control" name="soalan-1" id="">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10</option>
+                                    </select>
                                 </div>
                             </td>
                         </tr>
-                        <tr></tr>
+
+                        <tr>
+                            <td>2</td>
+                            <td>Kesempurnaan Kerja</td>
+                            <td>Menunjukkan inisiatif dalam mencapai kesempurnaan terhadap kerja yang diamanahkan.</td>
+                            <td>
+                                <div class="form-group">
+                                    <select class="form-control" name="soalan-2" id="">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10</option>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Berdisiplin</td>
+                            <td>Kelakuan baik dan berkeupayaan mengawal diri dengan patuh kepada tatatertib dan peraturan yang telah ditetapkan.</td>
+                            <td>
+                                <div class="form-group">
+                                    <select class="form-control" name="soalan-3" id="">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10</option>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>Nilai Tambah</td>
+                            <td>Menyumbangkan kepada aspek inovasi dan kreativiti untuk memperbaiki dan memperkemaskan sistem atau proses kerja kepada yang lebih baik.</td>
+                            <td>
+                                <div class="form-group">
+                                    <select class="form-control" name="soalan-4" id="">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10</option>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>Ketepatan Masa</td>
+                            <td>Melakasakan sesuatu kerja / tugasan, program, janji dan komitmen mengikut jadual pelaksanaan yang telah ditetapkan.</td>
+                            <td>
+                                <div class="form-group">
+                                    <select class="form-control" name="soalan-5" id="">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10</option>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td>Kerjasama</td>
+                            <td>Menunjukkan perlakuan bekerja bersama-sama dalam memberi kan sokongan, menyumbang dan bersefahaman.</td>
+                            <td>
+                                <div class="form-group">
+                                    <select class="form-control" name="soalan-6" id="">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10</option>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                            <td>Berhemah</td>
+                            <td>Mengamalkan budaya yang murni, mempunyai budi pekerti yang mulia seperti jujur, amanah, sederhana, berdedikasi dam beradab.</td>
+                            <td>
+                                <div class="form-group">
+                                    <select class="form-control" name="soalan-7" id="">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10</option>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>8</td>
+                            <td>Nilai Tambah</td>
+                            <td>Melibatkan diri secara aktif serta memberi sokongan sepenuhnya dalam program dan aktiviti yang dianjurkan di peringkat Bahagian / Kementerian.</td>
+                            <td>
+                                <div class="form-group">
+                                    <select class="form-control" name="soalan-8" id="">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10</option>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
-            </div><button class="btn btn-success" type="submit">Simpan</button></form>
+            </div><button class="btn btn-success" type="submit" name="simpan-penilaian">Simpan</button>
+        </form>
     </div>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>

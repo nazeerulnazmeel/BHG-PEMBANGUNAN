@@ -13,7 +13,7 @@ if (isset($_POST['penilai-login'])) {
    } 
    else {
       // $sql = "SELECT * FROM penilai WHERE kad_pengenalan=?";
-      $sql = "SELECT * FROM pegawai INNER JOIN penilai ON pegawai.uid=penilai.pegawai_id WHERE kad_pengenalan=?";
+      $sql = "SELECT * FROM (pegawai INNER JOIN penilai ON pegawai.uid=penilai.pegawai_id) INNER JOIN cawangan ON pegawai.cawangan_id=cawangan.uid WHERE kad_pengenalan=?";
       $stmt = mysqli_stmt_init($db);
       if (!mysqli_stmt_prepare($stmt, $sql)) {
          header("Location: login.php?error=sqlerror");
@@ -27,7 +27,7 @@ if (isset($_POST['penilai-login'])) {
          if($row = mysqli_fetch_assoc($result)){
             $pwdCheck = password_verify($passwd, $row['passwd']);
             $accessCheck = $row['access_id'];
-            if ($accessCheck != 1) {
+            if ($accessCheck != 2 &&  $accessCheck != 1) {
                header("Location: ../login.php?error=accessdenied");
                exit();
             }
@@ -35,14 +35,17 @@ if (isset($_POST['penilai-login'])) {
                header("Location: ../login.php?error=wrongpassword");
                exit();
             }
-            else if ($pwdCheck == true && $accessCheck == 1) {
+            else if ($pwdCheck == true && ($accessCheck == 1 || $accessCheck == 2 || $accessCheck == 3 || $accessCheck == 4)) {
                session_start();
-               $_SESSION['uid'] = $row['uid'];
-               // $_SESSION['kad_pengenalan'] = $row['kad_pengenalan'];
+               $_SESSION['logged-in'] = true;
+               $_SESSION['uid'] = $row['penilai_id'];
                $_SESSION['nama'] = $row['nama'];
                $_SESSION['jawatan'] = $row['jawatan'];
                $_SESSION['gred'] = $row['gred'];
                $_SESSION['unit_id'] = $row['unit_id'];
+               $_SESSION['cawangan_id'] = $row['cawangan_id'];
+               $_SESSION['nama_cawangan'] = $row['nama_cawangan'];
+               $_SESSION['access_id'] = $row['access_id'];
 
                header("Location: ../senaraipegawai.php");
                exit();

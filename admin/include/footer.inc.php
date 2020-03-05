@@ -19,6 +19,19 @@
                     $('#tunjuk-unit').html(units);
                 }
             });
+            // $.ajax({
+            //     method: 'post',
+            //     url: 'controller/loadunit.php',
+            //     data: {
+            //         cawanganID2: cawanganUid
+            //     },
+            //     dataType: 'text',
+            //     success: function(peg) {
+            //         console.log(pe);
+            //         $('#senarai-pegawai').empty();
+            //         $('#senarai-pegawai').html(peg);
+            //     }
+            // });
         });
     });
 
@@ -50,7 +63,7 @@
         $('#access-ctrl').change(function() {
             var access_id = $('#access-ctrl').val();
 
-            if (access_id == "1") {
+            if (access_id == 1 || access_id == 2 || access_id == 3 || access_id == 4) {
                 $('#passwd-popup').modal('show');
             }
         });

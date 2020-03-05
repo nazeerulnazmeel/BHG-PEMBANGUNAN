@@ -28,7 +28,7 @@
                         <li class="dropdown nav-item"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#">Dropdown </a>
                             <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="#">First Item</a><a class="dropdown-item" role="presentation" href="#">Second Item</a><a class="dropdown-item" role="presentation" href="#">Third Item</a></div>
                         </li>
-                    </ul><span class="navbar-text actions"> <a class="btn btn-light action-button" role="button" href="index.html">Logout</a></span>
+                    </ul><span class="navbar-text actions"> <a class="btn btn-light action-button" role="button" href="includes/logout.usr.inc.php">Logout</a></span>
                 </div>
             </div>
         </nav>

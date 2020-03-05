@@ -62,8 +62,11 @@ if ($resultCheck > 0) {
                     <label for="exampleFormControlSelect1">Jenis Akses</label>
                     <select id="access-ctrl" class="form-control" name="access">
                         <?php echo "<option selected value='" . $row['access_id'] . "'>" . $row['access_type'] . "</option>"; ?>
-                        <option value="1">Penilai</option>
-                        <option value="2">Bukan Penilai</option>
+                        <option value="1">Ketua Cawangan</option>
+                        <option value="2">Ketua Unit</option>
+                        <option value="3">SUBK</option>
+                        <option value="4">TSUBK</option>
+                        <option value="5">Lain-lain</option>
                     </select>
                 </div>
 
