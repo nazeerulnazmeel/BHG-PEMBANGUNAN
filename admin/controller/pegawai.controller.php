@@ -18,6 +18,7 @@ if (isset($_POST['tambah-pegawai'])) {
         $sql = "SELECT * FROM pegawai WHERE kad_pengenalan=?";
         $stmt = mysqli_stmt_init($db);
 
+        
         if (!mysqli_stmt_prepare($stmt, $sql)) {
             header("Location: ../tambah-pegawai.php?error=sqlerror");
             exit();
@@ -48,7 +49,12 @@ if (isset($_POST['tambah-pegawai'])) {
     }
     mysqli_stmt_close($stmt);
     mysqli_close($db);
-} else if (isset($_POST['edit-pegawai'])) {
+} 
+
+/*
+    Edit pegawai's information
+*/
+else if (isset($_POST['edit-pegawai'])) {
     require '../../includes/db.inc.php';
 
     $user_id = $_POST['id'];
@@ -63,6 +69,13 @@ if (isset($_POST['tambah-pegawai'])) {
     $passwd = $_POST['password'];
 
     $sql = "UPDATE pegawai SET kad_pengenalan=?, nama=?, jawatan=?, gred=?, cawangan_id=?, unit_id=?, kumpulan_id=?, access_id=? WHERE pegawai.uid=$user_id";
+    /* Password is required when selecting option:
+        1. Ketua Cawangan (TSUB)
+        2. Ketua Unit
+        3. SUBK
+        4. TSUBK
+
+    */
     $sql2 = "INSERT INTO penilai (passwd, pegawai_id) VALUES (?,?)";
     $stmt = mysqli_stmt_init($db);
     $stmt2 = mysqli_stmt_init($db);

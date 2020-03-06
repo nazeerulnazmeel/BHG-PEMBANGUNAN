@@ -13,7 +13,7 @@ if (isset($_POST['penilai-login'])) {
    } 
    else {
       // $sql = "SELECT * FROM penilai WHERE kad_pengenalan=?";
-      $sql = "SELECT * FROM (pegawai INNER JOIN penilai ON pegawai.uid=penilai.pegawai_id) INNER JOIN cawangan ON pegawai.cawangan_id=cawangan.uid WHERE kad_pengenalan=?";
+      $sql = "SELECT pegawai.uid, pegawai.nama, pegawai.jawatan, pegawai.gred, pegawai.cawangan_id, pegawai.unit_id, pegawai.access_id, penilai.passwd, penilai.pegawai_id, cawangan.nama_cawangan FROM (pegawai INNER JOIN penilai ON pegawai.uid=penilai.pegawai_id) INNER JOIN cawangan ON pegawai.cawangan_id=cawangan.uid WHERE kad_pengenalan=?";
       $stmt = mysqli_stmt_init($db);
       if (!mysqli_stmt_prepare($stmt, $sql)) {
          header("Location: login.php?error=sqlerror");
@@ -38,7 +38,7 @@ if (isset($_POST['penilai-login'])) {
             else if ($pwdCheck == true && ($accessCheck == 1 || $accessCheck == 2 || $accessCheck == 3 || $accessCheck == 4)) {
                session_start();
                $_SESSION['logged-in'] = true;
-               $_SESSION['uid'] = $row['penilai_id'];
+               $_SESSION['uid'] = $row['pegawai_id'];
                $_SESSION['nama'] = $row['nama'];
                $_SESSION['jawatan'] = $row['jawatan'];
                $_SESSION['gred'] = $row['gred'];

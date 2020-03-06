@@ -1,11 +1,11 @@
 <?php
 session_start();
-if (!empty($_SESSION['uid'])) {
+// if (!empty($_SESSION['uid'])) {
     
-}
-else {
-    header ("Location: login.php");
-}
+// }
+// else {
+//     header ("Location: login.php");
+// }
 include 'includes/header.usr.inc.php';
 
 require 'includes/db.inc.php';
@@ -28,16 +28,17 @@ $access_id = $_SESSION['access_id'];
                     <th class="table-active">Jawatan &amp; Gred</th>
                     <th class="table-active">Unit</th>
                     <th class="table-active">Status</th>
+                    <th class="table-active">Markah</th>
                 </tr>
             </thead>
             <tbody id="senarai-pegawai">
                 <?php
 
                 if ($access_id == 1) {
-                    $sql = "SELECT pegawai.uid, pegawai.nama, pegawai.jawatan, pegawai.gred, pegawai.cawangan_id, pegawai.unit_id, pegawai.kumpulan_id, pegawai.status_id, unit.nama_unit FROM (pegawai INNER JOIN unit ON pegawai.unit_id=unit.uid) WHERE pegawai.cawangan_id=$cawangan_id AND pegawai.kumpulan_id=1 AND pegawai.uid!=$pegawai_id";
+                    $sql = "SELECT pegawai.uid, pegawai.nama, pegawai.jawatan, pegawai.gred, pegawai.cawangan_id, pegawai.unit_id, pegawai.kumpulan_id, unit.nama_unit, penilaian.markah, penilaian.status_id FROM (pegawai INNER JOIN unit ON pegawai.unit_id=unit.uid)  WHERE pegawai.cawangan_id=$cawangan_id AND pegawai.kumpulan_id=1 AND pegawai.uid!=$pegawai_id";
                 }
                 else if ($access_id == 2) {
-                    $sql = "SELECT pegawai.uid, pegawai.nama, pegawai.jawatan, pegawai.gred, pegawai.cawangan_id, pegawai.unit_id, pegawai.kumpulan_id, pegawai.status_id, unit.nama_unit FROM (pegawai INNER JOIN unit ON pegawai.unit_id=unit.uid) WHERE pegawai.unit_id=$unit_id AND pegawai.kumpulan_id=2";
+                    $sql = "SELECT pegawai.uid, pegawai.nama, pegawai.jawatan, pegawai.gred, pegawai.cawangan_id, pegawai.unit_id, pegawai.kumpulan_id, unit.nama_unit, penilaian.markah, penilaian.status_id FROM ((pegawai INNER JOIN unit ON pegawai.unit_id=unit.uid) LEFT JOIN penilaian ON pegawai.uid=penilaian.pegawai_id) WHERE pegawai.unit_id=$unit_id AND pegawai.kumpulan_id=2";
                 }
                 // $sql = "SELECT * from ((pegawai INNER JOIN cawangan ON pegawai.cawangan_id=cawangan.uid) INNER JOIN unit ON pegawai.unit_id=unit.uid)";
                 $result = mysqli_query($db, $sql);
@@ -53,9 +54,16 @@ $access_id = $_SESSION['access_id'];
                         // echo "<td><button class='btn btn-danger' type='button' style='width: 117px;'>Belum dinilai</button></td>";
                         if ($row['status_id'] == 0){
                             echo "<td><a class='btn btn-danger' href='penilaian.php?uid=".$row['uid']."'>Belum dinilai</a></td>";
+                            echo "<td>0%</td>";
                         }else {
                             echo "<td><a class='btn btn-success'>Sudah dinilai</a></td>";
-                        }                      
+                            echo "<td>".$row['markah']."%</td>";
+                        }   
+                        // if ($row['markah'] == 0 ) {
+                        //     echo "<td>0%</td>";
+                        // }else if ($row['markah'] > 1) {
+                        //     echo "<td>".$row['markah']."%</td>";
+                        // }                   
                         echo "</tr>";
                         
                     }

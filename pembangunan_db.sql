@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 05, 2020 at 10:05 AM
+-- Generation Time: Mar 06, 2020 at 05:00 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.2
 
@@ -61,8 +61,8 @@ CREATE TABLE `administrator` (
 --
 
 INSERT INTO `administrator` (`uid`, `adm_usrname`, `adm_passwd`) VALUES
-(1, 'admin', '939e0f37932e3e440087f8a7e3035d27'),
-(2, 'bahar', '$2y$10$vau.pCzUxe7nMoxf7kbHI.SD16o2gEdYf7uoQh3xD.oY/5JKjVpqG');
+(2, 'bahar', '$2y$10$vau.pCzUxe7nMoxf7kbHI.SD16o2gEdYf7uoQh3xD.oY/5JKjVpqG'),
+(3, 'admin', '$2y$10$aIIgiEqhMGilRXaorOIXXeyJdabOPzyECXJahwH9I0Aog3WS3/GMe');
 
 -- --------------------------------------------------------
 
@@ -254,19 +254,16 @@ CREATE TABLE `penilaian` (
   `uid` int(11) NOT NULL,
   `pegawai_id` int(10) NOT NULL,
   `markah` double NOT NULL,
-  `penilai_id` int(10) NOT NULL
+  `penilai_id` int(10) NOT NULL,
+  `status_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `penilaian`
 --
 
-INSERT INTO `penilaian` (`uid`, `pegawai_id`, `markah`, `penilai_id`) VALUES
-(8, 4, 10, 3),
-(9, 4, 10, 3),
-(10, 4, 12.5, 3),
-(11, 4, 10, 3),
-(12, 7, 15, 3);
+INSERT INTO `penilaian` (`uid`, `pegawai_id`, `markah`, `penilai_id`, `status_id`) VALUES
+(21, 4, 10, 3, 1);
 
 -- --------------------------------------------------------
 
@@ -350,7 +347,9 @@ ALTER TABLE `penilai`
 -- Indexes for table `penilaian`
 --
 ALTER TABLE `penilaian`
-  ADD PRIMARY KEY (`uid`);
+  ADD PRIMARY KEY (`uid`),
+  ADD KEY `fk_pegawai_id` (`pegawai_id`),
+  ADD KEY `fk_penilai_id` (`penilai_id`);
 
 --
 -- Indexes for table `unit`
@@ -373,7 +372,7 @@ ALTER TABLE `access_control`
 -- AUTO_INCREMENT for table `administrator`
 --
 ALTER TABLE `administrator`
-  MODIFY `uid` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `uid` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `cawangan`
@@ -403,7 +402,7 @@ ALTER TABLE `penilai`
 -- AUTO_INCREMENT for table `penilaian`
 --
 ALTER TABLE `penilaian`
-  MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `unit`
@@ -429,6 +428,13 @@ ALTER TABLE `pegawai`
 --
 ALTER TABLE `penilai`
   ADD CONSTRAINT `fk_pegawai` FOREIGN KEY (`pegawai_id`) REFERENCES `pegawai` (`uid`);
+
+--
+-- Constraints for table `penilaian`
+--
+ALTER TABLE `penilaian`
+  ADD CONSTRAINT `fk_pegawai_id` FOREIGN KEY (`pegawai_id`) REFERENCES `pegawai` (`uid`),
+  ADD CONSTRAINT `fk_penilai_id` FOREIGN KEY (`penilai_id`) REFERENCES `pegawai` (`uid`);
 
 --
 -- Constraints for table `unit`

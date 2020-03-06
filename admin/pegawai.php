@@ -14,7 +14,13 @@ include 'include/header.inc.php';
                     <option value="">Pilih cawangan</option>
                     <?php
                     require '../includes/db.inc.php';
+                    /*  When cawangan been selected, it will load all units belong to
+                        the cawangan to Unit option below without refreshing the page.
 
+                        This function has been used along with AJAX script which can
+                        be found in admin/include/footer.inc.php
+
+                    */
                     $sql = "SELECT * from cawangan";
                     $result = mysqli_query($db, $sql);
                     $resultCheck = mysqli_num_rows($result);
